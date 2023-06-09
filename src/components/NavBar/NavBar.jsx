@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import API from "../../config/api";
 import SearchBar from "../SearchBar/SearchBar";
 import * as S from "./styles";
-import useTokenContext from "../../contexts/TokenContext";
-import useUserContext from "../../contexts/UserContext";
+import useTokenContext from "../../contexts/useTokenContext";
+import useUserContext from "../../contexts/useUserContext";
 import { Tooltip } from "react-tooltip";
 
 const NavBar = () => {

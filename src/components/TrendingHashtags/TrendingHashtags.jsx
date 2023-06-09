@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import API from "../../config/api";
 import { Hashtag } from "./styles";
 import { useNavigate } from "react-router";
-import useTokenContext from "../../contexts/TokenContext";
-import useRefreshContext from "../../contexts/RefreshContext";
+import useTokenContext from "../../contexts/useTokenContext";
+import useRefreshContext from "../../contexts/useRefreshContext";
 
 export default function TrendingHashtags(props) {
   const { loading, setPosts } = props;
@@ -25,7 +25,7 @@ export default function TrendingHashtags(props) {
       }
     }
     getTrendingHashtags();
-  }, [loading, props.posts]);
+  }, [loading, props.posts, token]);
 
   async function openHashtagPage(hashtag) {
     setPosts(undefined);

@@ -12,7 +12,7 @@ import { useOutletContext } from "react-router-dom";
 
 const initialFormState = { url: "", content: "" };
 
-export default function PostForm({ user, token, loading }) {
+export default function PostForm({ user, token }) {
   const [form, setForm] = useState(initialFormState);
   const [imageLoaded, setImageLoaded] = useState(false);
   const { setPosts, disabled, setDisabled } = useOutletContext();

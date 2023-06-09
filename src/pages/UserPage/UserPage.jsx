@@ -4,8 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import API from "../../config/api";
 import PostsRenderer from "../../components/PostsRenderer/PostsRenderer";
-import useUserContext from "../../contexts/UserContext";
-import useTokenContext from "../../contexts/TokenContext";
+import useUserContext from "../../contexts/useUserContext";
+import useTokenContext from "../../contexts/useTokenContext";
 import InfiniteScroll from "react-infinite-scroller";
 import { LoadingComponent } from "../../components/LoadingComponent/LoadingComponent.jsx";
 
@@ -38,12 +38,11 @@ export default function UserPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, navigate, token]);
 
   const handleImageLoad = useCallback(() => {
     setImageLoaded(true);
   }, []);
-
 
   const fetchMorePosts = async (page) => {
     try {
@@ -59,11 +58,11 @@ export default function UserPage() {
 
   function changeFollowState() {
     API.followUser(token, id)
-      .then((res) => {
+      .then(() => {
         setFollowUpdated(false);
         setDisabledButton(false);
       })
-      .catch((err) => {
+      .catch(() => {
         alert("An error occurred while trying to follow the user, please try again");
         setDisabledButton(false);
       });
@@ -74,7 +73,7 @@ export default function UserPage() {
 
   return (
     <S.ContainerUserPage>
-      <S.HeaderUserPage buttonStyle={(user.following !== undefined && id in user.following) ? "true" : undefined}>
+      <S.HeaderUserPage buttonStyle={user.following !== undefined && id in user.following ? "true" : undefined}>
         <div>
           <img
             alt="profile"
@@ -83,7 +82,7 @@ export default function UserPage() {
             style={!imageLoaded ? { display: "none" } : {}}
           />
           {imageLoaded ? (
-            <p>{userData.username}'s posts</p>
+            <p>{userData.username}&apos;s posts</p>
           ) : (
             <>
               <S.ImagePlaceholder />
@@ -91,13 +90,11 @@ export default function UserPage() {
             </>
           )}
         </div>
-        {user.id != id &&
+        {user.id != id && (
           <button data-test="follow-btn" disabled={disabledButton} onClick={() => changeFollowState()}>
-            {
-              (disabledButton) ? "..." : (user.following !== undefined && id in user.following) ? "Unfollow" : "Follow"
-            }
+            {disabledButton ? "..." : user.following !== undefined && id in user.following ? "Unfollow" : "Follow"}
           </button>
-        }
+        )}
       </S.HeaderUserPage>
       <S.ContentUserPage>
         <div>

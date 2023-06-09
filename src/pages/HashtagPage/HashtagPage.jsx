@@ -11,9 +11,9 @@ import API from "../../config/api";
 import TrendingHashtags from "../../components/TrendingHashtags/TrendingHashtags";
 import { useParams } from "react-router";
 import PostsRenderer from "../../components/PostsRenderer/PostsRenderer";
-import useUserContext from "../../contexts/UserContext";
-import useTokenContext from "../../contexts/TokenContext";
-import useRefreshContext from "../../contexts/RefreshContext";
+import useUserContext from "../../contexts/useUserContext";
+import useTokenContext from "../../contexts/useTokenContext";
+import useRefreshContext from "../../contexts/useRefreshContext";
 import InfiniteScroll from "react-infinite-scroller";
 import { LoadingComponent } from "../../components/LoadingComponent/LoadingComponent.jsx";
 

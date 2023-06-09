@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../config/api";
-import useTokenContext from "../../contexts/TokenContext";
+import useTokenContext from "../../contexts/useTokenContext";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -89,7 +89,7 @@ export default function SignUpPage() {
     }
 
     signUpUser(form)
-      .then((_response) => {
+      .then(() => {
         // setIsSignUpSuccessful(true);
         navigate("/");
       })

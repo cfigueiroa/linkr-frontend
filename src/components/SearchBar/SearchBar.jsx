@@ -5,8 +5,8 @@ import { DebounceInput } from "react-debounce-input";
 import { useNavigate } from "react-router-dom";
 import API from "../../config/api";
 import * as S from "./styles";
-import useTokenContext from "../../contexts/TokenContext";
-import useUserContext from "../../contexts/UserContext";
+import useTokenContext from "../../contexts/useTokenContext";
+import useUserContext from "../../contexts/useUserContext";
 
 export default function SearchBar(props) {
   const { token } = useTokenContext();
@@ -30,24 +30,24 @@ export default function SearchBar(props) {
         .then((res) => {
           setSearchResultList(res.data);
         })
-        .catch((err) => {
+        .catch(() => {
           console.log("An error occurred, please refresh the page");
         });
     }
-  }, [search]);
+  }, [search, token, user]);
 
-  function sortSearch(searchResult){
+  function sortSearch(searchResult) {
     searchResult.sort((a, b) => {
       const idA = a.id;
       const idB = b.id;
-    
+
       if (idA in user.following && !(idB in user.following)) {
-        return -1; 
+        return -1;
       } else if (idB in user.following && !(idA in user.following)) {
-        return 1; 
+        return 1;
       }
-    
-      return 0; 
+
+      return 0;
     });
 
     return searchResult;
@@ -73,7 +73,7 @@ export default function SearchBar(props) {
           <div key={index} data-test="user-search" onClick={() => navigate(`user/${result.id}`)}>
             <img src={result.picture} alt="User Avatar" />
             <p>{result.username}</p>
-            {(result.id in user.following) && <p>• following</p>}
+            {result.id in user.following && <p>• following</p>}
           </div>
         ))}
       </S.ContainerSearchResults>

@@ -1,15 +1,12 @@
-import React from 'react';
-import { TokenProvider } from "./TokenContext";
-import { UserProvider } from "./UserContext";
-import { RefreshProvider } from "./RefreshContext";
+import TokenProvider from "./TokenProvider";
+import UserProvider from "./UserProvider";
+import RefreshProvider from "./RefreshProvider";
 
 const MainProvider = ({ children }) => {
   return (
     <TokenProvider>
       <UserProvider>
-        <RefreshProvider>
-          {children}
-        </RefreshProvider>
+        <RefreshProvider>{children}</RefreshProvider>
       </UserProvider>
     </TokenProvider>
   );

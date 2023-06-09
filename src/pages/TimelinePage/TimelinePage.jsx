@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import API from "../../config/api";
 import useInterval from "../../hooks/useInterval";
-import useTokenContext from "../../contexts/TokenContext";
-import useUserContext from "../../contexts/UserContext";
+import useTokenContext from "../../contexts/useTokenContext";
+import useUserContext from "../../contexts/useUserContext";
 import PostForm from "../../components/PostForm/PostForm";
 import PostsRenderer from "../../components/PostsRenderer/PostsRenderer";
 import TrendingHashtags from "../../components/TrendingHashtags/TrendingHashtags";
@@ -22,7 +22,7 @@ import { LoadingComponent } from "../../components/LoadingComponent/LoadingCompo
 export default function TimelinePage() {
   const { token } = useTokenContext();
   const { user } = useUserContext();
-  const { posts, setPosts, fetch, setFetch } = useOutletContext();
+  const { posts, setPosts, fetch } = useOutletContext();
   const [loading, setLoading] = useState(false);
   const [newPosts, setNewPosts] = useState(posts);
   const [newPostsCount, setNewPostsCount] = useState(0);

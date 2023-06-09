@@ -20,15 +20,14 @@ import {
 } from "./styles";
 import LinkrImage from "../../assets/linkr-image.jpg";
 import { Tooltip } from "react-tooltip";
-import useTokenContext from "../../contexts/TokenContext";
-import useRefreshContext from "../../contexts/RefreshContext";
-import { IoPaperPlaneOutline } from "react-icons/io5";
+import useTokenContext from "../../contexts/useTokenContext";
+import useRefreshContext from "../../contexts/useRefreshContext";
 import CommentsComponent from "../CommentsComponent/CommentsComponent";
 import { AiOutlineComment } from "react-icons/ai";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog.jsx";
 import RepostComponent from "../RepostComponent/RepostComponent.jsx";
 
-export default function PostComponent({ postId, post, userId, username, setPosts, _posts }) {
+export default function PostComponent({ postId, post, userId, username, setPosts }) {
   const { repost_id, reposter_user_id, repost_count } = post;
   let { reposter_username } = post;
   const { token } = useTokenContext();
@@ -71,11 +70,11 @@ export default function PostComponent({ postId, post, userId, username, setPosts
     setLoading(true);
     const promise = API.editPost(token, post.id, { content: newContent });
     promise
-      .then((res) => {
+      .then(() => {
         setEditing(false);
         setPostContent(newContent);
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Houve um erro ao editar seu post");
       })
       .finally(() => {
@@ -111,6 +110,7 @@ export default function PostComponent({ postId, post, userId, username, setPosts
     setMyPost((prev) => {
       if (liked) {
         const { [userId.toString()]: omittedKey, ...updatedPost } = prev;
+        console.log({omittedKey})
         setHowMany(howMany - 1);
         setLiked(false);
         return updatedPost;
@@ -153,7 +153,7 @@ export default function PostComponent({ postId, post, userId, username, setPosts
     setLoading(true);
     const promise = API.deletePost(token, post.id);
     promise
-      .then((res) => {
+      .then(() => {
         setDeleteConfirmation(false);
         setPosts((prevPosts) => prevPosts.filter((updatedPost) => updatedPost.id !== post.id));
       })

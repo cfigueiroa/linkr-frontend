@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../config/api";
-import useTokenContext from "../../contexts/TokenContext";
+import useTokenContext from "../../contexts/useTokenContext";
 import * as S from "./styles";
 
 export default function SignInPage() {
