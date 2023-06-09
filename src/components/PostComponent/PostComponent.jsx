@@ -16,8 +16,6 @@ import {
   EspacoIcones,
   PostHeader,
   PostOuterContainer,
-  CommentContainer,
-  CommentInputContainer,
   PictureLikesCommentsAndRepost,
 } from "./styles";
 import LinkrImage from "../../assets/linkr-image.jpg";
